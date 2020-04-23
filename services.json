@@ -1,0 +1,65 @@
+{
+    "minecraft": {
+        "servers": {
+            "proxy": {
+                "name": "Bungee (mc.left4craft.org)",
+                "host": "mc.left4craft.org",
+                "port": 25565,
+                "component": "qcqwgct5cc8h",
+                "players_metric": "8pnxyq35c63y",
+                "interval": 1
+            },
+            "hub": {
+                "name": "Hub",
+                "component": "05xzlr2rnx56"
+            },
+            "survival": {
+                "name": "Survival",
+                "tps_metric": "rfc0t2625tzn",
+                "component": "76vydl7ptl3x"
+            },
+            "creative": {
+                "name": "Creative",
+                "component": "m8kslt8dr249"
+            },
+            "zombies": {
+                "name": "Zombies",
+                "component": "r94ndzf78bcf"
+            },
+            "build": {
+                "name": "Build",
+                "component": "9gfgpmxhbtkx"
+            }
+        }
+
+    },
+    "websites": {
+        "forums": {
+            "name": "Forums (www.left4craft.org)",
+            "host": "https://www.left4craft.org",
+            "component": "9s5vb1qvr7bj"
+        },
+        "web": {
+            "name": "web.left4craft.org",
+            "host": "https://web.left4craft.org",
+            "component": "0xvhfwzfsg93"
+        },
+        "short": {
+            "name": "left4.cf",
+            "host": "https://left4.cf",
+            "component": "thrqbf1g9rt1"
+        }
+    },
+    "external": {
+        "mojang": {
+            "name": "Mojang Auth Servers",
+            "component": "vjff8v7gnbrp",
+            "interval": 5
+        },
+        "discord": {
+            "name": "Discord API",
+            "component": "m4zvfs2r51jj",
+            "interval": 5
+        }
+    }
+}

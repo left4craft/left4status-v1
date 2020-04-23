@@ -1,3 +1,7 @@
+# Custom
+config.js
+database.js 
+
 # Logs
 logs
 *.log
