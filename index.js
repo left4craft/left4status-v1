@@ -136,6 +136,23 @@ for (site in sites) {
         workers.updateSite.run(runner, s, await isReachable(sites[s].host));
     }, config.ping_interval * 60000);
 };
+
+
+// external APIs
+let external = services.external;
+for (api in external) {
+    let a = api;
+
+    //////////////////////////////////////////////////////
+    workers[services.external[a].worker].run(runner);
+    //////////////////////////////////////////////////////
+
+    setInterval(() => {
+        workers[services.external[a].worker].run(runner);
+    }, services.external[a].interval * 60000);
+};
+
+
 // start the server
 log.info("Starting HTTP server");
 http.listen(8080);

@@ -52,14 +52,25 @@
     },
     "external": {
         "mojang": {
-            "name": "Mojang Auth Servers",
+            "name": "Mojang Auth Server",
             "component": "vjff8v7gnbrp",
-            "interval": 5
+            "interval": 5,
+            "worker": "mojangAuth",
+            "api": {
+                "url": "https://status.mojang.com/check",
+                "service_name": "authserver.mojang.com"
+            }
+
         },
         "discord": {
             "name": "Discord API",
             "component": "m4zvfs2r51jj",
-            "interval": 5
+            "interval": 5,
+            "worker": "discordAPI",
+            "api": {
+                "url": "https://srhpyqt94yxb.statuspage.io/api/v2/components.json",
+                "component_name": "API"
+            }
         }
     }
 }

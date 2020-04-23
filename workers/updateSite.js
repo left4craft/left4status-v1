@@ -16,10 +16,13 @@ module.exports = {
             if (err) return log.error(err);
             // log.debug(result);
             // log.console(`Updated '${services.websites[site].name}'`);
+
+            app.workers.sendSiteStatus.run(online ? 'operational' : 'major', site, app);
+            
         });
 
 
-        app.workers.sendSiteStatus.run(online ? 'operational' : 'major', site, app);
+        
 
     }
 }
