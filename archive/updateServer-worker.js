@@ -40,7 +40,7 @@ module.exports = {
                         },
                     })
                     .then(() => {
-                        fetch(`${config.statuspage.public_api}v2/status.json`)
+                        fetch(`${config.statuspage.public_api}status.json`)
                             .then(res => res.json())
                             .then(json => {
                                 let indicator_icon = config.statuspage.indicators[json.status.indicator];
