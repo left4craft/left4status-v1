@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 module.exports = {
     method: 'get',
     path: '/api/status',
-    name: 'status',
+    name: 'fullStatus',
     execute(req, res, app) {
         log.console(`[HTTP] ${this.method.toUpperCase()} ${this.name}`);
 
