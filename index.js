@@ -123,10 +123,10 @@ for (const file of routes_dir) {
  */
 
 // Bungee Proxy
-workers.queryBungee.run(runner);
-setInterval(() => {
-    workers.queryBungee.run(runner);
-}, services.minecraft.servers.proxy.interval * 60000);
+// workers.queryBungee.run(runner);
+// setInterval(() => {
+//     workers.queryBungee.run(runner);
+// }, services.minecraft.servers.proxy.interval * 60000);
 
 // websites
 let sites = services.websites;
@@ -142,11 +142,7 @@ for (site in sites) {
 let external = services.external;
 for (api in external) {
     let a = api;
-
-    //////////////////////////////////////////////////////
     workers[services.external[a].worker].run(runner);
-    //////////////////////////////////////////////////////
-
     setInterval(() => {
         workers[services.external[a].worker].run(runner);
     }, services.external[a].interval * 60000);

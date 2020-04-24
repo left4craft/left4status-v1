@@ -9,7 +9,7 @@ module.exports = {
         const now = Date.now();
         let expires = now + Math.floor(Math.min(240, 2400 / data.tps) * 1000);
 
-        app.db.query(`UPDATE minecraft SET player_count = ${data.player_count}, players = JSON_ARRAY('${data.players}'), tps = ${data.tps}, last_online = ${now}, expires = ${expires} WHERE id = "${data.server}";`, (err, result) => {
+        app.db.query(`UPDATE minecraft SET player_count = ${data.player_count}, players = "${data.players}", tps = ${data.tps}, last_online = ${now}, expires = ${expires} WHERE id = "${data.server}";`, (err, result) => {
             if (err) return log.error(err);
             // log.debug(result);
             log.console(`Updated '${services.minecraft.servers[data.server].name}', expires in ${((expires - now) / (1000 * 60)).toFixed(1)} mins`);
