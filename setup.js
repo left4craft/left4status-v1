@@ -14,9 +14,9 @@ const database = require('./database');
 
 const db = mysql.createConnection({
     host: database.host,
-    port: database.port,
+    // port: database.port,
     user: database.user,
-    // password: database.password,
+    password: database.password,
     database: database.name
 });
 
@@ -55,7 +55,7 @@ db.connect(function (err) {
         });
     }
 
-    db.query("CREATE TABLE `api`.`minecraft` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `player_count` SMALLINT NOT NULL , `players` JSON NOT NULL , `tps` DECIMAL(4,2) NOT NULL , `last_online` VARCHAR(32) NULL  , `expires` VARCHAR(32) NULL );", (err, result) => {
+    db.query("CREATE TABLE `api`.`minecraft` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `player_count` SMALLINT NOT NULL , `players` LONGTEXT NOT NULL , `tps` DECIMAL(4,2) NOT NULL , `last_online` VARCHAR(32) NULL  , `expires` VARCHAR(32) NULL );", (err, result) => {
         if (err) return log.error(err);
         // log.debug(result);
         log.success(`Created 'minecraft' table`);

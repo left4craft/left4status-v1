@@ -7,7 +7,6 @@
 
 const express = require('express');
 const app = express();
-const http = require('http').createServer(app);
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const fs = require('fs');
@@ -25,7 +24,7 @@ const db = mysql.createConnection({
     host: database.host,
     // port: database.port,
     user: database.user,
-    // password: database.password,
+    password: database.password,
     database: database.name
 });
 
@@ -133,7 +132,7 @@ let sites = services.websites;
 for (site in sites) {
     let s = site;
     setInterval(async () => {
-        workers.updateSite.run(runner, s, await isReachable(sites[s].host));
+        workers.updateSite.run(runner, s, await isReachable(sites[s].host, {timeout: 15000}));
     }, config.ping_interval * 60000);
 };
 
@@ -150,5 +149,6 @@ for (api in external) {
 
 
 // start the server
-log.info("Starting HTTP server");
-http.listen(8080);
+app.listen(config.port, () => {
+    log.success(`HTTP server is listening on port ${config.port}`);
+ })
