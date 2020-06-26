@@ -6,7 +6,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'sendSiteStatus',
     run(status, site, app) {
-        app.db.query(`SELECT * FROM websites WHERE id = "${site}";`, (err, result) => {
+        app.db.query('SELECT * FROM websites WHERE id=?', [site], (err, result) => {
             if (err) return app.log.error(err);
 
             /////////////////////////////////
@@ -15,12 +15,12 @@ module.exports = {
 
             app.log.console(`${services.websites[site].name}'s status has changed`);
 
-            app.db.query(`UPDATE websites SET status = "${status}" WHERE id = "${site}";`, (err, result) => {
+            app.db.query('UPDATE websites SET status=? WHERE id=?;', [status, site], (err, result) => {
                 if (err) return app.log.error(err);
                 log.info(`${services.websites[site].name} ${app.config.statuses[status].info}`);
             });
 
-            app.db.query(`SELECT * FROM websites WHERE id = "${site}";`, (err, result) => {
+            app.db.query('SELECT * FROM websites WHERE id=?', [site], (err, result) => {
                 if (err) return app.log.error(err);
 
                 // send to statuspage
@@ -46,10 +46,10 @@ module.exports = {
                     .setURL(app.config.statuspage.url)
                     .setDescription(`The **${services.websites[site].name}** website ${app.config.statuses[status].info}\n\n`)
                     // .addBlankField()
-                    .setFooter("Left4Craft | Status Service", `${app.config.assets}logo.png`)
+                    .setFooter('Left4Craft | Status Service', `${app.config.assets}logo.png`)
                     .setTimestamp();
 
-                if (status === 'partial' || status === 'major' || status === 'maintenance') embed.addField('Last Online', `${mins} ${mins === 1 ? "minute" : "minutes"} ago`, true);
+                if (status === 'partial' || status === 'major' || status === 'maintenance') embed.addField('Last Online', `${mins} ${mins === 1 ? 'minute' : 'minutes'} ago`, true);
                 embed.addField('Status Page', `[${app.config.statuspage.pretty_url}](${app.config.statuspage.url})`, true);
                 
                 let recent = JSON.parse(fs.readFileSync('./recent.json'));

@@ -12,19 +12,19 @@ module.exports = {
 
 
         if (!services.minecraft.servers[server]) {
-            app.log.warn("Someone attempted to update an unkown server (400)");
+            app.log.warn('Someone attempted to update an unkown server (400)');
             res.status(400).send({
-                "status": 400,
-                "message": "unknown server"
+                'status': 400,
+                'message': 'unknown server'
             });
             return res.end();
         }
 
         if (!key || !(app.config.keys.includes(key))) {
-            app.log.warn("Someone attempted to update a server with an invalid key (401)");
+            app.log.warn('Someone attempted to update a server with an invalid key (401)');
             res.status(401).send({
-                "status": 401,
-                "message": "invalid api key"
+                'status': 401,
+                'message': 'invalid api key'
             });
             return res.end();
         };
@@ -33,9 +33,9 @@ module.exports = {
 
         if (!req.query['player_count'] || !req.query['tps']) {
             res.status(400).send({
-                "status": 400,
-                "message": "invalid data",
-                "query": ["player_count", "players", "tps"]
+                'status': 400,
+                'message': 'invalid data',
+                'query': ['player_count', 'players', 'tps']
             });
             return res.end();
         };
@@ -53,8 +53,8 @@ module.exports = {
         app.workers.updateServer.run(app, data);
 
         res.status(200).send({
-            "status": 200,
-            "message": "success"
+            'status': 200,
+            'message': 'success'
         });
         res.end();
     }

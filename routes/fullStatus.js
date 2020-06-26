@@ -47,7 +47,7 @@ module.exports = {
                 };
                 data.summary.status.short = app.config.statuspage.indicators[json.status.indicator];
 
-                app.db.query(`SELECT * FROM minecraft;`, (err, result) => {
+                app.db.query('SELECT * FROM minecraft;', (err, result) => {
                     if (err) return app.log.error(err);
                     // log.debug(result);
 
@@ -59,7 +59,7 @@ module.exports = {
                         data.services.minecraft[server.id].extended.short = server.status;
                     };
 
-                    app.db.query(`SELECT * FROM websites;`, (err, result) => {
+                    app.db.query('SELECT * FROM websites;', (err, result) => {
                         if (err) return app.log.error(err);
                         // log.debug(result);
 

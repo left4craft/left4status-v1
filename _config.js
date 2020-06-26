@@ -37,25 +37,25 @@ module.exports = {
             colour: '#4CAF50'
         },
         degraded: {
-            title:  'Degraded performance',
+            title: 'Degraded performance',
             info: 'is suffering from degraded performance',
             code: 'degraded_performance',
             colour: '#F1C40F'
         },
         partial: {
-            title:  'Partial outage',
+            title: 'Partial outage',
             info: 'may be offline or unreachable',
             code: 'partial_outage',
             colour: '#E67E22'
         },
         major: {
-            title:  'Major outage',
+            title: 'Major outage',
             info: 'is offline',
             code: 'major_outage',
             colour: '#E74C3C'
         },
         maintenance: {
-            title:  'Maintenance',
+            title: 'Maintenance',
             info: 'is under maintenance',
             code: 'under_maintenance',
             colour: '#3498DB'

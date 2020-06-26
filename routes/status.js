@@ -11,22 +11,22 @@ module.exports = {
         let key = req.query['key'];
 
         if (!services[type]) {
-            app.log.warn("Someone attempted to update an unkown server (400)");
+            app.log.warn('Someone attempted to update an unkown server (400)');
             res.status(400);
             res.send({
-                "status": 400,
-                "message": "unknown service type",
-                "can_be_one_of": ['minecraft', 'websites', 'external']
+                'status': 400,
+                'message': 'unknown service type',
+                'can_be_one_of': ['minecraft', 'websites', 'external']
             });
             return res.end();
         }
 
-        // if (!key || !(config.keys.includes(key))) {
-        //     log.warn("Someone attempted to update a server with an invalid key (401)");
+        // if (!key || !(app.config.keys.includes(key))) {
+        //     log.warn('Someone attempted to update a server with an invalid key (401)');
         //     res.status(401);
         //     res.send({
-        //         "status": 401,
-        //         "message": "invalid api key"
+        //         'status': 401,
+        //         'message': 'invalid api key'
         //     });
         //     return res.end();
         // };
@@ -41,7 +41,7 @@ module.exports = {
 
         let table = type === 'external' ? 'websites' : type;
 
-        app.db.query(`SELECT * FROM ${table};`, (err, result) => {
+        app.db.query('SELECT * FROM ?', [table], (err, result) => {
             if (err) return log.error(err);
             // log.debug(result);
 
@@ -49,12 +49,12 @@ module.exports = {
                 let service = result[i];
                 if (type === 'minecraft') {
                     data.services[service.id] = service;
-                    data.services[service.id].extended = config.statuses[service.status];
+                    data.services[service.id].extended = app.config.statuses[service.status];
                     data.services[service.id].extended.short = service.status;
                 } else {
                     if (services[type][service.id]) {
                         data.services[service.id] = service;
-                        data.services[service.id].extended = config.statuses[service.status];
+                        data.services[service.id].extended = app.config.statuses[service.status];
                         data.services[service.id].extended.short = service.status;
                     };
                 };

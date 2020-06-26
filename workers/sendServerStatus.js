@@ -6,7 +6,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'sendServerStatus',
     run(status, data, app) {
-        app.db.query(`SELECT status FROM minecraft WHERE id = "${data.server}";`, (err, result) => {
+        app.db.query('SELECT status FROM minecraft WHERE id=?;', [data.server], (err, result) => {
             if (err) return app.log.error(err);
             /////////////////////////////////
             if (result[0].status == status) return; // stop here if nothing changed
@@ -14,11 +14,11 @@ module.exports = {
 
             app.log.console(`${services.minecraft.servers[data.server].name}'s status has changed`)
 
-            app.db.query(`UPDATE minecraft SET status = "${status}" WHERE id = "${data.server}";`, (err, result) => {
+            app.db.query('UPDATE minecraft SET status=? WHERE id=?;', [status, data.server], (err, result) => {
                 if (err) return app.log.error(err);
                 log.info(`${services.minecraft.servers[data.server].name} ${app.config.statuses[status].info}`);
 
-                app.db.query(`SELECT last_online FROM minecraft WHERE id = "${data.server}";`, (err, result) => {
+                app.db.query('SELECT last_online FROM minecraft WHERE id=?', [data.server], (err, result) => {
                     if (err) return app.log.error(err);
 
                     // send to statuspage
@@ -44,11 +44,11 @@ module.exports = {
                         .setURL(app.config.statuspage.url)
                         .setDescription(`The **${services.minecraft.servers[data.server].name}** Minecraft server ${app.config.statuses[status].info}\n\n`)
                         // .addBlankField()
-                        .setFooter("Left4Craft | Status Service", `${app.config.assets}logo.png`)
+                        .setFooter('Left4Craft | Status Service', `${app.config.assets}logo.png`)
                         .setTimestamp();
 
-                    if (data.server !== 'proxy') embed.addField("Last Known TPS", data.tps, true);
-                    if (status == 'partial' || status == 'major' || status == 'maintenance') embed.addField('Last Online', `${mins} ${mins === 1 ? "minute" : "minutes"} ago`, true);
+                    if (data.server !== 'proxy') embed.addField('Last Known TPS', data.tps, true);
+                    if (status == 'partial' || status == 'major' || status == 'maintenance') embed.addField('Last Online', `${mins} ${mins === 1 ? 'minute' : 'minutes'} ago`, true);
                     embed.addField('Status Page', `[${app.config.statuspage.pretty_url}](${app.config.statuspage.url})`, true)
 
                     let recent = JSON.parse(fs.readFileSync('./recent.json'));
@@ -64,7 +64,7 @@ module.exports = {
                     if ((((Date.now() - recent.last_pinged) / (1000 * 60)) > 5) || status === 'maintenance') {
                         message.content = `<@&${app.config.discord.role}>\n\n`;
                         recent.last_pinged = Date.now();
-                        fs.writeFile("./recent.json", JSON.stringify(recent), (err) => console.error);
+                        fs.writeFile('./recent.json', JSON.stringify(recent), (err) => console.error);
                     }
 
                     // send the message

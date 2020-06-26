@@ -31,7 +31,7 @@ const db = mysql.createConnection({
 // logger setup
 log.setup({
     logToFile: false,
-    timestamp: "DD/MM/YY hh:mm:ss",
+    timestamp: 'DD/MM/YY hh:mm:ss',
     custom: {
         db: {
             title: 'MySQL',
@@ -46,8 +46,8 @@ log.setup({
 db.connect((err) => {
     // db.query(`DROP TABLE minecraft`) // reset database for development
     if (err) { // if connection fails
-        log.warn("Could not connect to database");
-        log.warn(log.colour.bgYellowBright(log.color.black("CRITICAL: NO DATABASE CONNECTION - FATAL ERROR WILL LIKELY OCCUR")) + log.colour.bgBlack(""));
+        log.warn('Could not connect to database');
+        log.warn(log.colour.bgYellowBright(log.color.black('CRITICAL: NO DATABASE CONNECTION - FATAL ERROR WILL LIKELY OCCUR')) + log.colour.bgBlack(''));
         return log.error(err);
     };
 
@@ -55,7 +55,7 @@ db.connect((err) => {
 
     db.query(`SELECT 1 FROM minecraft LIMIT 1;`, (err, result) => {
         if (err) { // if table does not exist
-            log.warn(log.colour.bgYellowBright(log.color.black("'minecraft': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+            log.warn(log.colour.bgYellowBright(log.color.black("'minecraft': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(''));
             return log.error(err);
         };
         log.success(`'minecraft' table exists`);
@@ -63,7 +63,7 @@ db.connect((err) => {
 
     // db.query(`SELECT 1 FROM mc_query LIMIT 1;`, function (err, result) {
     //     if (err) { // if table does not exist
-    //         log.warn(log.colour.bgYellowBright(log.color.black("'mc_query': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+    //         log.warn(log.colour.bgYellowBright(log.color.black(''mc_query': TABLE IS MISSING: Please run 'node setup' to setup the database')) + log.colour.bgBlack(''));
     //         return log.error(err);
     //     };
     //     log.success(`'mc_query' table exists`)
@@ -71,7 +71,7 @@ db.connect((err) => {
 
     db.query(`SELECT 1 FROM websites LIMIT 1;`, (err, result) => {
         if (err) { // if table does not exist
-            log.warn(log.colour.bgYellowBright(log.color.black("'websites': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+            log.warn(log.colour.bgYellowBright(log.color.black("'websites': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(''));
             return log.error(err);
         };
         log.success(`'websites' table exists`);
@@ -130,7 +130,7 @@ for (const file of routes_dir) {
 // websites
 for (site in services.websites) {
     setInterval(async () => {
-        workers.updateSite.run(runner, site, await isReachable(sites[site].host, {timeout: 15000}));
+        workers.updateSite.run(runner, site, await isReachable(sites[site].host, { timeout: 15000 }));
     }, config.ping_interval * 60000);
 };
 

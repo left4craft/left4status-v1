@@ -26,7 +26,7 @@ module.exports = {
 
                 log.info(`Mojang Auth Server is ${app.config.statuses[status].title}`);
 
-                app.db.query(`UPDATE websites SET last_online = ${Date.now()} WHERE id = "mojang";`, (err, result) => {
+                app.db.query('UPDATE websites SET last_online=? WHERE id = "mojang";', [Date.now()], (err, result) => {
                     if (err) return app.log.error(err);
 
                     app.workers.sendExternalStatus.run(status, 'mojang', app);

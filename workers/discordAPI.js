@@ -28,7 +28,7 @@ module.exports = {
 
                 app.log.info(`Discord API is ${app.config.statuses[status].title}`);
 
-                app.db.query(`UPDATE websites SET last_online = ${Date.now()} WHERE id = "discord";`, (err, result) => {
+                app.db.query('UPDATE websites SET last_online=? WHERE id = "discord";', [Date.now()], (err, result) => {
                     if (err) return app.log.error(err);
 
                     app.workers.sendExternalStatus.run(status, 'discord', app);

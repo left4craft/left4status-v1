@@ -8,7 +8,7 @@ module.exports = {
         const now = Date.now();
         // const expires = Math.floor((now + (config.ping_interval * 2)) * 1000);
 
-        app.db.query(`UPDATE websites SET last_online = ${now} WHERE id = "${site}";`, (err, result) => {
+        app.db.query('UPDATE websites SET last_online=? WHERE id=?;', [now, site], (err, result) => {
             if (err) return app.log.error(err);
             // log.debug(result);
             // log.console(`Updated '${services.websites[site].name}'`);
