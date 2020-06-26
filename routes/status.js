@@ -1,20 +1,17 @@
-const log = require('leekslazylogger');
-const config = require('../config');
 const services = require('../services.json');
-const fetch = require('node-fetch');
 
 module.exports = {
     method: 'get',
     path: '/api/status/:type',
     name: 'status',
     execute(req, res, app) {
-        log.console(`[HTTP] ${this.method.toUpperCase()} ${this.name}`);
+        app.log.console(`[HTTP] ${this.method.toUpperCase()} ${this.name}`);
 
         let type = req.params.type;
         let key = req.query['key'];
 
         if (!services[type]) {
-            log.warn("Someone attempted to update an unkown server (400)");
+            app.log.warn("Someone attempted to update an unkown server (400)");
             res.status(400);
             res.send({
                 "status": 400,
@@ -64,10 +61,8 @@ module.exports = {
             };
 
             // send data
-            res.status(200);
-            res.send(data);
+            res.status(200).send(data);
             res.end();
-
         });
     },
 };
