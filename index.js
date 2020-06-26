@@ -7,7 +7,6 @@
 
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const fs = require('fs');
 const log = require('leekslazylogger');
@@ -32,7 +31,7 @@ const db = mysql.createConnection({
 // logger setup
 log.setup({
     logToFile: false,
-    timestamp: "DD/MM/YY hh:mm:ss",
+    timestamp: 'DD/MM/YY hh:mm:ss',
     custom: {
         db: {
             title: 'MySQL',
@@ -44,45 +43,45 @@ log.setup({
 /**
  * Database
  */
-db.connect(function (err) {
+db.connect((err) => {
     // db.query(`DROP TABLE minecraft`) // reset database for development
     if (err) { // if connection fails
-        log.warn("Could not connect to database");
-        log.warn(log.colour.bgYellowBright(log.color.black("CRITICAL: NO DATABASE CONNECTION - FATAL ERROR WILL LIKELY OCCUR")) + log.colour.bgBlack(""));
+        log.warn('Could not connect to database');
+        log.warn(log.colour.bgYellowBright(log.color.black('CRITICAL: NO DATABASE CONNECTION - FATAL ERROR WILL LIKELY OCCUR')) + log.colour.bgBlack(''));
         return log.error(err);
     };
 
     log.success(`Connected to database (${database.name}@${database.host})`);
 
-    db.query(`SELECT 1 FROM minecraft LIMIT 1;`, function (err, result) {
+    db.query(`SELECT 1 FROM minecraft LIMIT 1;`, (err, result) => {
         if (err) { // if table does not exist
-            log.warn(log.colour.bgYellowBright(log.color.black("'minecraft': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+            log.warn(log.colour.bgYellowBright(log.color.black("'minecraft': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(''));
             return log.error(err);
         };
-        log.success(`'minecraft' table exists`)
+        log.success(`'minecraft' table exists`);
     });
 
     // db.query(`SELECT 1 FROM mc_query LIMIT 1;`, function (err, result) {
     //     if (err) { // if table does not exist
-    //         log.warn(log.colour.bgYellowBright(log.color.black("'mc_query': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+    //         log.warn(log.colour.bgYellowBright(log.color.black(''mc_query': TABLE IS MISSING: Please run 'node setup' to setup the database')) + log.colour.bgBlack(''));
     //         return log.error(err);
     //     };
     //     log.success(`'mc_query' table exists`)
     // });
 
-    db.query(`SELECT 1 FROM websites LIMIT 1;`, function (err, result) {
+    db.query(`SELECT 1 FROM websites LIMIT 1;`, (err, result) => {
         if (err) { // if table does not exist
-            log.warn(log.colour.bgYellowBright(log.color.black("'websites': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(""));
+            log.warn(log.colour.bgYellowBright(log.color.black("'websites': TABLE IS MISSING: Please run 'node setup' to setup the database")) + log.colour.bgBlack(''));
             return log.error(err);
         };
-        log.success(`'websites' table exists`)
+        log.success(`'websites' table exists`);
     });
 });
 
 
 // JSON Body Parser for POST reqs
-app.use(bodyParser.json());
-app.use(express.static('./public/'))
+app.use(express.json());
+app.use(express.static('./public/'));
 
 
 /**
@@ -108,7 +107,8 @@ let runner = {
     db: db,
     workers: workers,
     log: log,
-    hook: hook
+    hook: hook,
+    config: config
 }
 for (const file of routes_dir) {
     const route = require(`./routes/${file}`);
@@ -128,27 +128,20 @@ for (const file of routes_dir) {
 // }, services.minecraft.servers.proxy.interval * 60000);
 
 // websites
-let sites = services.websites;
-for (site in sites) {
-    let s = site;
+for (site in services.websites) {
     setInterval(async () => {
-        workers.updateSite.run(runner, s, await isReachable(sites[s].host, {timeout: 15000}));
+        workers.updateSite.run(runner, site, await isReachable(sites[site].host, { timeout: 15000 }));
     }, config.ping_interval * 60000);
 };
 
 
 // external APIs
-let external = services.external;
-for (api in external) {
-    let a = api;
-    workers[services.external[a].worker].run(runner);
+for (api in services.external) {
+    workers[services.external[api].worker].run(runner);
     setInterval(() => {
-        workers[services.external[a].worker].run(runner);
-    }, services.external[a].interval * 60000);
+        workers[services.external[api].worker].run(runner);
+    }, services.external[api].interval * 60000);
 };
 
-
 // start the server
-app.listen(config.port, () => {
-    log.success(`HTTP server is listening on port ${config.port}`);
- })
+app.listen(config.port, () => log.success(`HTTP server is listening on port ${config.port}`));
