@@ -34,7 +34,7 @@
 
     },
     "websites": {
-        "forums": {
+        "website": {
             "name": "Main website (left4craft.org)",
             "host": "https://www.left4craft.org",
             "component": "9s5vb1qvr7bj"
