@@ -28,7 +28,7 @@ module.exports = {
         status_chan_id: '701035082240229477',
         status_chan_desc: `:green_square:   \n:white_small_square:  https://status.left4craft.org   \n:white_small_square:  Type **!status** in #bots   \n:white_small_square:  Use **!subscribe status** to get notifications`
     },
-    assets: 'https://left4status.web.illinois.edu/img/', // MUST include trailing /
+    assets: 'https://status.left4craft.org/img/', // MUST include trailing /
     statuses: {
         operational: {
             title: 'Operational',
