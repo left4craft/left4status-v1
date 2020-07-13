@@ -22,8 +22,8 @@
                 "name": "Creative",
                 "component": "m8kslt8dr249"
             },
-            "zombies": {
-                "name": "Zombies",
+            "paintball": {
+                "name": "Paintball",
                 "component": "r94ndzf78bcf"
             },
             "build": {
@@ -35,14 +35,9 @@
     },
     "websites": {
         "forums": {
-            "name": "Forums (www.left4craft.org)",
+            "name": "Main website (left4craft.org)",
             "host": "https://www.left4craft.org",
             "component": "9s5vb1qvr7bj"
-        },
-        "web": {
-            "name": "web.left4craft.org",
-            "host": "https://web.left4craft.org",
-            "component": "0xvhfwzfsg93"
         },
         "short": {
             "name": "left4.cf",
