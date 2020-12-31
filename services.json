@@ -22,8 +22,8 @@
                 "name": "Creative",
                 "component": "m8kslt8dr249"
             },
-            "paintball": {
-                "name": "Paintball",
+            "partygames": {
+                "name": "PartyGames",
                 "component": "r94ndzf78bcf"
             },
             "build": {
@@ -35,7 +35,7 @@
     },
     "websites": {
         "website": {
-            "name": "Main website (left4craft.org)",
+            "name": "left4craft.org",
             "host": "https://www.left4craft.org",
             "component": "9s5vb1qvr7bj"
         },
@@ -43,6 +43,11 @@
             "name": "left4.cf",
             "host": "https://left4.cf/admin",
             "component": "thrqbf1g9rt1"
+        },
+        "console": {
+            "name": "Web console",
+            "host": "https://command.coderedstone.org",
+            "component": "3n7cykvrh894"
         }
     },
     "external": {
