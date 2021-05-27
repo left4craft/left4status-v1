@@ -2,6 +2,7 @@ module.exports = {
     keys: ['development'],
     ping_interval: 3,
     port: 8000,
+    keys: ['secret'],
     statuspage: {
         url: 'https://left4craft.statuspage.io/',
         public_api: 'https://left4craft.statuspage.io/api/', // MUST include trailing /
