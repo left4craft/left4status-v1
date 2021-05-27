@@ -128,11 +128,13 @@ for (const file of routes_dir) {
 // }, services.minecraft.servers.proxy.interval * 60000);
 
 // websites
-for (site in services.websites) {
+//for (site in services.websites) {
     setInterval(async () => {
-        workers.updateSite.run(runner, site, await isReachable(sites[site].host, { timeout: 15000 }));
+	for (site in services.websites) {
+        	workers.updateSite.run(runner, site, await isReachable(sites[site].host, { timeout: 15000 }));
+	}
     }, config.ping_interval * 60000);
-};
+//};
 
 
 // external APIs
