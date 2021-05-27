@@ -13,7 +13,7 @@ module.exports = {
             if (result[0].status == status) return; // stop here if nothing changed
             /////////////////////////////////
 
-            log.console(`${services.external[service].name}'s status has changed`);
+            app.log.console(`${services.external[service].name}'s status has changed`);
 
             app.db.query('UPDATE websites SET status=? WHERE id=?;', [status, service], (err, result) => {
                 if (err) return app.log.error(err);

@@ -66,6 +66,7 @@ db.connect((err) => {
 
     // add minecraft servers to table
     let servers = services.minecraft.servers;
+    log.info(servers);
     for (server in servers) {
         db.query(`INSERT INTO minecraft (id, name, player_count, players, tps) VALUES ('${server}', '${servers[server].name}', 0, '[]', 0);`, (err, result) => {
             if (err) return log.error(err);
