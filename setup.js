@@ -52,13 +52,13 @@ db.connect((err) => {
         });
     }
 
-    db.query('CREATE TABLE `api`.`minecraft` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `player_count` SMALLINT NOT NULL , `players` LONGTEXT NOT NULL , `tps` DECIMAL(4,2) NOT NULL , `last_online` VARCHAR(32) NULL  , `expires` VARCHAR(32) NULL );', (err, result) => {
+    db.query('CREATE TABLE `' + database.name + '`.`minecraft` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `player_count` SMALLINT NOT NULL , `players` LONGTEXT NOT NULL , `tps` DECIMAL(4,2) NOT NULL , `last_online` VARCHAR(32) NULL  , `expires` VARCHAR(32) NULL );', (err, result) => {
         if (err) return log.error(err);
         // log.debug(result);
         log.success(`Created 'minecraft' table`);
     });
 
-    db.query('CREATE TABLE `api`.`websites` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `last_online` VARCHAR(32) NULL );', (err, result) => {
+    db.query('CREATE TABLE `' + database.name + '`.`websites` ( `id` VARCHAR(128) NOT NULL , `name` VARCHAR(128) NOT NULL , `status` VARCHAR(128) NULL , `last_online` VARCHAR(32) NULL );', (err, result) => {
         if (err) return log.error(err);
         // log.debug(result);
         log.success(`Created 'websites' table`);
