@@ -16,7 +16,7 @@ module.exports = {
 
             app.db.query('UPDATE minecraft SET status=? WHERE id=?;', [status, data.server], (err, result) => {
                 if (err) return app.log.error(err);
-                log.info(`${services.minecraft.servers[data.server].name} ${app.config.statuses[status].info}`);
+                app.log.info(`${services.minecraft.servers[data.server].name} ${app.config.statuses[status].info}`);
 
                 app.db.query('SELECT last_online FROM minecraft WHERE id=?', [data.server], (err, result) => {
                     if (err) return app.log.error(err);
