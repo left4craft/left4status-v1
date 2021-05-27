@@ -5,7 +5,7 @@ module.exports = {
     keys: ['secret'],
     statuspage: {
         url: 'https://left4craft.statuspage.io/',
-        public_api: 'https://left4craft.statuspage.io/api/', // MUST include trailing /
+        public_api: 'https://left4craft.statuspage.io/api/v2/', // MUST include trailing /
         pretty_url: 'status.left4craft.org',
         page_id: 'jp6z181cyytx',
         api_key: 'api key from manage.statuspage.io',
