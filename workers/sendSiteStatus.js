@@ -17,7 +17,7 @@ module.exports = {
 
             app.db.query('UPDATE websites SET status=? WHERE id=?;', [status, site], (err, result) => {
                 if (err) return app.log.error(err);
-                log.info(`${services.websites[site].name} ${app.config.statuses[status].info}`);
+                app.log.info(`${services.websites[site].name} ${app.config.statuses[status].info}`);
             });
 
             app.db.query('SELECT * FROM websites WHERE id=?', [site], (err, result) => {
