@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports = {
     name: 'sendMetric',
     run(metric, data, app) {
-        fetch(`https://api.statuspage.io/v1/pages/${app.config.statuspage.page_id}/metrics/${metric}/data`, {
+        fetch(`https://api.statuspage.io/v1/pages/${app.config.statuspage.page_id}/metrics/${metric}/data.json`, {
                 method: 'post',
                 body: {
                     data: {
@@ -12,8 +12,7 @@ module.exports = {
                     }
                 },
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': app.config.statuspage.api_key
+                    'Authorization': 'OAuth ' + app.config.statuspage.api_key
                 },
             })
             .then(app.log.info(`Submitted metric to statuspage`))
