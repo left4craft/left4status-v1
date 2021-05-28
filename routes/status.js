@@ -41,7 +41,7 @@ module.exports = {
 
         let table = type === 'external' ? 'websites' : type;
 
-        app.db.query('SELECT * FROM ?', [table], (err, result) => {
+        app.db.query('SELECT * FROM ??', [table], (err, result) => {
             if (err) return app.log.error(err);
             // log.debug(result);
 
