@@ -18,6 +18,6 @@ module.exports = {
             })
             .then(app.log.info(`Submitted metric to statuspage`))
             .then(res => res.json())
-            .then(json => app.console.log(json));
+            .then(json => app.log.info(json));
     }
 }
