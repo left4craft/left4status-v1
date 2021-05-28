@@ -6,10 +6,10 @@ module.exports = {
     run(metric, data, app) {
         fetch(`https://api.statuspage.io/v1/pages/${app.config.statuspage.page_id}/metrics/${metric}/data`, {
                 method: 'post',
-                body: JSON.stringify({
+                body: JSON.stringify({data: {
                     timestamp: Date.now() / 1000,
                     value: data
-                }),
+                }}),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': app.config.statuspage.api_key
