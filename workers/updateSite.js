@@ -3,7 +3,7 @@ const services = require('../services.json');
 module.exports = {
     name: 'updateSite',
     run(app, site, online) {
-        app.log.console(`${services.websites[site].name} is ${log.colour[online ? 'greenBright' : 'redBright'](online ? 'online' : 'offline')}`)
+        app.log.console(`${services.websites[site].name} is ${app.log.colour[online ? 'greenBright' : 'redBright'](online ? 'online' : 'offline')}`)
 
         const now = Date.now();
         // const expires = Math.floor((now + (config.ping_interval * 2)) * 1000);
