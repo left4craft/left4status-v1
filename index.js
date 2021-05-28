@@ -130,7 +130,7 @@ for (const file of routes_dir) {
 // websites
 //for (site in services.websites) {
 setInterval(async () => {
-	for (site of services.websites) {
+	for (site in services.websites) {
         workers.updateSite.run(runner, site, await isReachable(services.websites[site].host, { timeout: 15000 }));
 	}
 }, config.ping_interval * 60000);
