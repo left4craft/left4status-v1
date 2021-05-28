@@ -16,8 +16,8 @@ module.exports = {
                     'Authorization': app.config.statuspage.api_key
                 },
             })
-            .then(app.log.info(`Submitted metric to statuspage`));
-            // .then(res => res.json())
-            // .then(json => console.log(json));
+            .then(app.log.info(`Submitted metric to statuspage`))
+            .then(res => res.json())
+            .then(json => app.console.log(json));
     }
 }
