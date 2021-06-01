@@ -41,7 +41,7 @@
         },
         "short": {
             "name": "l4c.link",
-            "host": "https://l4c.link/status",
+            "host": "https://l4c.link/api/status",
             "component": "thrqbf1g9rt1"
         },
         "console": {
