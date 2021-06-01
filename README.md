@@ -1,8 +1,8 @@
 # left4status
 Left4Craft's status tracker API. Integrates with StatusPage.io and Discord to show server status and performance.
 
-**Don't want to pay $10 for md_5's [BungeeStatus](https://www.spigotmc.org/resources/bungeestatus.708/)?**
-This is much cooler and completely free *(if you can set it up - it's not a complete solution)*.
+<!--**Don't want to pay $10 for md_5's [BungeeStatus](https://www.spigotmc.org/resources/bungeestatus.708/)?**
+This is much cooler and completely free *(if you can set it up - it's not a complete solution)*.-->
 
 - Each server sends an api request to the web server once per minute with player and TPS data to show it is online (Pinger plugin not included)
 - If a server does not ping within the expected time (~2 mins, varies depending on last known TPS) it is presumed to be offline
